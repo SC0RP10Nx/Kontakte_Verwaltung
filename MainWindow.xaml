@@ -1,0 +1,57 @@
+﻿<Window x:Class="Kontaktverwaltung.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kontaktverwaltung"
+        mc:Ignorable="d"
+        Title="Kontaktverwaltung" Height="450" Width="800">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Suchfeld -->
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <TextBox x:Name="Tbx_Suche" Height="30" Width="350" VerticalContentAlignment="Center"
+                     TextChanged="Tbx_Suche_TextChanged" TextAlignment="Center"/>
+            <TextBlock Text="Nach Namen suchen" Foreground="Gray" IsHitTestVisible="False"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Margin="350,0,0,0">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=Tbx_Suche}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+
+        <!-- Tabelle-->
+        <DataGrid x:Name="Dg_Kontakte" Grid.Row="1"
+                  IsReadOnly="True" SelectionMode="Single" AutoGenerateColumns="False"
+                  MouseDoubleClick="Dg_Kontakte_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="60"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Telefon" Binding="{Binding Telefon}" Width="200"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
+            <Button x:Name="Btn_Insert" Content="Insert_Test" Width="100" Height="30"
+                    Click="Btn_Insert_Click"/>
+            <Button x:Name="Btn_Delete" Content="Löschen" Width="100" Height="30" Margin="10,0,0,0"
+                    Click="Btn_Delete_Click"/>
+            <Button x:Name="Btn_Neu" Content="Neuer Kontakt" Width="100" Height="30" Margin="10,0,0,0"
+                    Click="Btn_Neu_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
